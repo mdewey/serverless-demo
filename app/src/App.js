@@ -3,6 +3,30 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      secret: "loading..."
+    }
+  }
+
+  componentDidMount() {
+    fetch("https://40bro24ihl.execute-api.us-east-1.amazonaws.com/dev/hello")
+      .then(resp => {
+        console.log(resp)
+        return resp.json()
+      })
+      .then(data => {
+        console.log(data);
+        this.setState(() => {
+          return {
+            secret: data.message
+          }
+        })
+      })
+  }
+
   render() {
     return (
       <div className="App">
@@ -11,7 +35,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          {this.state.secret}
         </p>
       </div>
     );

@@ -8,8 +8,11 @@ provider:
   region: us-east-1
 
 functions:
-  app:
-    handler: index.handler
+  index:
+    handler: handler.index
     events:
-      - http: ANY /
-      - http: 'ANY {proxy+}'
+      - http: 
+          path: hello
+          method: get
+          cors: true
+
