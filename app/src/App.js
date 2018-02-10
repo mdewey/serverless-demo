@@ -12,7 +12,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://40bro24ihl.execute-api.us-east-1.amazonaws.com/dev/hello")
+    fetch("https://40bro24ihl.execute-api.us-east-1.amazonaws.com/dev")
       .then(resp => {
         console.log(resp)
         return resp.json()
@@ -21,7 +21,7 @@ class App extends Component {
         console.log(data);
         this.setState(() => {
           return {
-            secret: data.message
+            secret: data.hello
           }
         })
       })
