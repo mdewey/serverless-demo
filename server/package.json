@@ -7,5 +7,9 @@
   "scripts": {
     "deploy": "serverless deploy -v",
     "local": "serverless invoke local"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "serverless-http": "^1.5.3"
   }
 }
