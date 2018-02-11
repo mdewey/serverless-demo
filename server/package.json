@@ -9,6 +9,7 @@
     "local": "serverless invoke local"
   },
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.16.2",
     "serverless-http": "^1.5.3"
   }
