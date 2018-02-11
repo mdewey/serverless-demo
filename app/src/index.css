@@ -3,3 +3,19 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+
+*{
+  border: 1px green solid;
+}
+
+.main-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+.main-content > section {
+  display: flex;
+  justify-content: center;
+}
