@@ -10,7 +10,7 @@ export default class Auth {
     redirectUri: 'http://localhost:3000/callback',
     audience: 'https://dewseph.auth0.com/userinfo',
     responseType: 'token id_token',
-    scope: 'openid'
+    scope: 'openid email'
   });
 
   
@@ -27,11 +27,12 @@ export default class Auth {
 
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
+      console.log({authResult});
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        history.replace('/home');
+        history.push('/home');
       } else if (err) {
-        history.replace('/home');
+        history.push('/');
         console.log(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
@@ -44,6 +45,7 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    localStorage.setItem('email', authResult.idTokenPayload.email);
     // navigate to the home route
     history.replace('/home');
   }
@@ -53,8 +55,9 @@ export default class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('email');
     // navigate to the home route
-    history.replace('/home');
+    history.push('/');
   }
 
   isAuthenticated() {

@@ -30,7 +30,7 @@ class App extends Component {
           <Route path="/home" exact component={Dashboard}></Route>
           <Route path="/callback" render={(props) => {
             handleAuthentication(props);
-            return <Callback {...props} />
+            return <Dashboard {...props} />
           }} />
         </div>
       </div>

@@ -8,6 +8,13 @@ const auth = new Auth();
 
 class Home extends Component {
 
+    constructor(props){
+        super(props)
+        this.state = {
+            score: 0,
+        }
+    }
+
     login() {
         auth.login();
     }
@@ -27,8 +34,9 @@ class Home extends Component {
                     <h4>Not like that other guy..</h4>
                 </header>
                 <section>
-                    This is how to Be Like Ben
+                    You 
                 </section>
+                <section></section>
             </div>
         )
     }
