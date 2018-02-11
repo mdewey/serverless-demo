@@ -19,3 +19,24 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.virtues-container{
+  display: flex;
+  flex-direction: column;
+}
+.virtues-container > div{
+  display: flex;
+  flex-direction: row;
+}
+
+.yes-no-buttons{
+  width: 25%;
+  display: flex;
+}
+.yes-no-buttons > button{
+  width: 50%;
+}
+
+.virtue-description{
+  width: 75%;
+}

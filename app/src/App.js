@@ -5,6 +5,7 @@ import Callback from './pages/Callback';
 import Auth from './auth/Auth';
 import Home from './pages/Home.jsx'
 import Dashboard from './pages/Dashboard.jsx'
+import Report from './pages/Report.jsx'
 
 const auth = new Auth();
 
@@ -28,6 +29,7 @@ class App extends Component {
         <div className="App">
           <Route path="/" exact component={Home}></Route>
           <Route path="/home" exact component={Dashboard}></Route>
+          <Route path="/ben-points" exact component={Report}></Route>
           <Route path="/callback" render={(props) => {
             handleAuthentication(props);
             return <Dashboard {...props} />
