@@ -41,14 +41,16 @@ module.exports.getOrCreateUser = (event, context) => {
       })
     } else {
       // get users docs
-      mongo.getUserVirtuesCount(user, (err, results) => {
-        return context.done(null, buildJsonResponse({
-          "message": "returning user",
-          user: foundUser,
-          data: { count: results }
-        }));
+      mongo.getUserVirtuesCount(user, (err, count) => {
+        mongo.getUsersTodayValues(user, (err, today) => {
+          return context.done(null, buildJsonResponse({
+            "message": "returning user",
+            user: foundUser,
+            data: { count, today }
+          }));
+        })
       })
-      // return user and stuff
+
     }
   })
 }

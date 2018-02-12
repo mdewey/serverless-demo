@@ -37,11 +37,33 @@ const getUserVirtuesCount = (user, next) => {
         _virtues.aggregate([
             {
                 $match: {
-                    userId: user._id
+                    userId: user._id, 
+                    completed:true
                 }
             },
             {
                 $count: "benPoints"
+            }
+        ], (err, results) => {
+            results.toArray().then((data) => {
+                const rv = data[0]
+                console.log("getting count of bens", { err, rv })
+                return next(err, rv)
+            });
+        })
+    });
+}
+
+const getUsersTodayValues = (user, next) => {
+    const dateKey = format(Date.now(), "YYYY-MM-DD");
+    connectToDatabase((err, db) => {
+        const _virtues = db.collection("virtues");
+        _virtues.aggregate([
+            {
+                $match: {
+                    userId: user._id, 
+                    dateKey
+                }
             }
         ], (err, results) => {
             results.toArray().then((data) => {
@@ -108,5 +130,6 @@ module.exports = {
     getUser,
     getUserVirtuesCount,
     addYesToVirtue,
-    addNoToVirtue
+    addNoToVirtue,
+    getUsersTodayValues
 }
