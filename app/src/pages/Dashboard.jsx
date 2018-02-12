@@ -45,10 +45,31 @@ class Home extends Component {
 
     noClicked(e, virtue) {
         console.log("clicked no for", { virtue })
+        const _url = BASE_URL.concat("virtue/",virtue.id ,"/no")
+        fetch(_url, {
+            method: "post", 
+            headers:{
+                Authorization: "Bearer " + localStorage.getItem("id_token")
+            },
+            // body: JSON.stringify(_data)
+        }).then(resp => resp.json()).then(data => {
+            console.log("back", { data })
+        })
     }
 
     yesClicked(e, virtue) {
         console.log("clicked yes for", { virtue })
+        console.log("clicked no for", { virtue })
+        const _url = BASE_URL.concat("virtue/",virtue.id ,"/yes")
+        fetch(_url, {
+            method: "post", 
+            headers:{
+                Authorization: "Bearer " + localStorage.getItem("id_token")
+            },
+            // body: JSON.stringify(_data)
+        }).then(resp => resp.json()).then(data => {
+            console.log("back", { data })
+        })
     }
 
     componentDidMount() {
