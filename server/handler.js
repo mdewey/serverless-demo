@@ -1,7 +1,7 @@
 'use strict';
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = "fMIzDIjyrqnF33BPDB_5e-5k_RKgGccJ4r3Gdi_rtmesDGM_MPTVcv-B8XWZEQLw";
 
+const mongo = require("./database");
 
 const buildJsonResponse = (json) => {
   const response = {
@@ -12,15 +12,18 @@ const buildJsonResponse = (json) => {
     },
     body: JSON.stringify(json)
   };
+  console.log("returning", response)
   return response;
 }
 
-module.exports.index = function (event, context, callback) {
-  return callback(null, buildJsonResponse({ "message": "Hello World!" }));
+module.exports.index = (event, context) =>  {
+  mongo.getUser("mtdewey55@gmail.com", (err, user) => {
+    return context.done(null, buildJsonResponse({ user, err }));
+  })
 };
 
 
-module.exports.getOrCreateUser = (event, context, callback) => {
+module.exports.getOrCreateUser = (event, context) => {
 
   const _token = event.headers.Authorization.split(" ")[1];
   console.log({ event, _token });
@@ -28,7 +31,23 @@ module.exports.getOrCreateUser = (event, context, callback) => {
   const _data = jwt.decode(_token, { complete: true })
   console.log({ _data })
   const user = {
-    email : data.payload.email
+    email: _data.payload.email
   }
-  return callback(null, buildJsonResponse({ "message": "Creating user", _data }));
+
+
+
+  console.log("got here 0", user)
+  mongo.getUser(user.email, (err, foundUser) => {
+    if (!foundUser) {
+      mongo.addUser({ email: user.email }, (err, user) => {
+        console.log("got here 1")
+        return context.done(null, buildJsonResponse({ "message": "creating user", user }));
+      })
+    } else {
+      console.log("got here 2")
+      // get users docs
+      // return user and stuff
+      return context.done(null,buildJsonResponse({ "message": "returning user", foundUser }));
+    }
+  })
 }
