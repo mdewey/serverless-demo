@@ -31,8 +31,32 @@ const getUser = (email, next) => {
 }
 
 
+const getUserVirtuesCount = (user, next) => {
+    connectToDatabase((err, db) => {
+        const _virtues = db.collection("virtues");
+        _virtues.aggregate([
+            {
+                $match: {
+                  userId: user._id
+                }
+              },
+              {
+                $count: "benPoints"
+              }
+        ], (err, results) => {
+            results.toArray().then((data) => {
+                console.log("getting count of bens", {err, data})
+                return  next(err, data)
+            });
+        })
+    });
+}
+
+
+
 
 module.exports = {
     addUser,
-    getUser
+    getUser,
+    getUserVirtuesCount
 }

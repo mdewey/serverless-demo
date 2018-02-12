@@ -16,7 +16,7 @@ const buildJsonResponse = (json) => {
   return response;
 }
 
-module.exports.index = (event, context) =>  {
+module.exports.index = (event, context) => {
   mongo.getUser("mtdewey55@gmail.com", (err, user) => {
     return context.done(null, buildJsonResponse({ user, err }));
   })
@@ -24,19 +24,11 @@ module.exports.index = (event, context) =>  {
 
 
 module.exports.getOrCreateUser = (event, context) => {
-
   const _token = event.headers.Authorization.split(" ")[1];
-  console.log({ event, _token });
-
   const _data = jwt.decode(_token, { complete: true })
-  console.log({ _data })
   const user = {
     email: _data.payload.email
   }
-
-
-
-  console.log("got here 0", user)
   mongo.getUser(user.email, (err, foundUser) => {
     if (!foundUser) {
       mongo.addUser({ email: user.email }, (err, user) => {
@@ -46,8 +38,14 @@ module.exports.getOrCreateUser = (event, context) => {
     } else {
       console.log("got here 2")
       // get users docs
+      mongo.getUserVirtuesCount(user, (err, results) => {
+        return context.done(null, buildJsonResponse({
+          "message": "returning user",
+          user: foundUser,
+          data: { count: results }
+        }));
+      })
       // return user and stuff
-      return context.done(null,buildJsonResponse({ "message": "returning user", foundUser }));
     }
   })
 }
