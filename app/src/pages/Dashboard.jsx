@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 
 import Auth from '../auth/Auth.js';
 
-const BASE_URL = "https://40bro24ihl.execute-api.us-east-1.amazonaws.com/dev"
+const BASE_URL = " https://ancg5rd6oi.execute-api.us-east-1.amazonaws.com/dev/"
+
 
 const auth = new Auth();
 
@@ -51,13 +52,13 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        const _url = BASE_URL.concat("/user/getorcreate")
-        const _data = {
-            token:  localStorage.getItem("id_token")
-        }
+        const _url = BASE_URL.concat("getorcreate")
         fetch(_url, {
             method: "post", 
-            body: JSON.stringify(_data)
+            headers:{
+                Authorization: "Bearer " + localStorage.getItem("id_token")
+            },
+            // body: JSON.stringify(_data)
         }).then(resp => resp.json()).then(data => {
             console.log("back", { data })
         })

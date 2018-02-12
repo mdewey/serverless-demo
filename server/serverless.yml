@@ -1,5 +1,4 @@
-
-service: my-express-application
+service: my-lamdba-based-application
 
 provider:
   name: aws
@@ -7,10 +6,18 @@ provider:
   stage: dev
   region: us-east-1
 
-
 functions:
-  app:
-    handler: index.handler
+  echo:
+    handler: handler.index
     events:
-      - http: ANY /
-      - http: 'ANY {proxy+}'
+      - http: 
+          path: hello
+          method: get
+          cors: true
+  getOrCreateUser:
+    handler: handler.getOrCreateUser
+    events:
+      - http: 
+          path: getorcreate
+          method: post
+          cors: true

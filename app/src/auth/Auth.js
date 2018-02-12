@@ -6,7 +6,7 @@ import history from "../history"
 export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'dewseph.auth0.com',
-    clientID: 'jkNOH6JIaTPJLQv0jGTFQTRKakqDubbN',
+    clientID: 'AjdRSELHyBDQRF24j2OV4YIkwsytbPQ1',
     redirectUri: 'http://localhost:3000/callback',
     audience: 'https://dewseph.auth0.com/userinfo',
     responseType: 'token id_token',
