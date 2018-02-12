@@ -14,9 +14,7 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            user: {
-                points: 0
-            },
+            benPoints:0,
             virtues: [
                 { title: "Temperance", id: 0, description: "Eat not to dullness. Drink not to elevation." },
                 { title: "Silence", id: 1, description: "Speak not but what may benefit others or yourself. Avoid trifling conversation." },
@@ -45,10 +43,10 @@ class Home extends Component {
 
     noClicked(e, virtue) {
         console.log("clicked no for", { virtue })
-        const _url = BASE_URL.concat("virtue/",virtue.id ,"/no")
+        const _url = BASE_URL.concat("virtue/", virtue.id, "/no")
         fetch(_url, {
-            method: "post", 
-            headers:{
+            method: "post",
+            headers: {
                 Authorization: "Bearer " + localStorage.getItem("id_token")
             },
             // body: JSON.stringify(_data)
@@ -60,10 +58,10 @@ class Home extends Component {
     yesClicked(e, virtue) {
         console.log("clicked yes for", { virtue })
         console.log("clicked no for", { virtue })
-        const _url = BASE_URL.concat("virtue/",virtue.id ,"/yes")
+        const _url = BASE_URL.concat("virtue/", virtue.id, "/yes")
         fetch(_url, {
-            method: "post", 
-            headers:{
+            method: "post",
+            headers: {
                 Authorization: "Bearer " + localStorage.getItem("id_token")
             },
             // body: JSON.stringify(_data)
@@ -75,13 +73,18 @@ class Home extends Component {
     componentDidMount() {
         const _url = BASE_URL.concat("getorcreate")
         fetch(_url, {
-            method: "post", 
-            headers:{
+            method: "post",
+            headers: {
                 Authorization: "Bearer " + localStorage.getItem("id_token")
             },
             // body: JSON.stringify(_data)
         }).then(resp => resp.json()).then(data => {
             console.log("back", { data })
+            this.setState(() => {
+                return {
+                    benPoints: data.data.count.benPoints
+                }
+            })
         })
     }
 
@@ -96,7 +99,7 @@ class Home extends Component {
                     <h4>Not like that other guy..</h4>
                 </header>
                 <section>
-                    You have {this.state.user.points} Benjamins.
+                    You have {this.state.benPoints} Benjamins.
                     <a href="/ben-points">What?</a>
                 </section>
                 <section className="virtues-container">
