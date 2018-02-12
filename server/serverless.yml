@@ -21,3 +21,17 @@ functions:
           path: getorcreate
           method: post
           cors: true
+  addYesToVirtue:
+    handler: handler.addYesToVirtue
+    events:
+      - http: 
+          path: virtue/{id}/yes
+          method: post
+          cors: true
+  addNoToVirtue:
+    handler: handler.addNoToVirtue
+    events:
+      - http: 
+          path: virtue/{id}/no
+          method: post
+          cors: true
