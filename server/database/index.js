@@ -145,7 +145,7 @@ const getAllUsersVirtues = (user, next) =>{
             },
             {
                 $sort:{
-                    "timeStamp":1
+                    "timestamp":-1
                 }
             }
         ], (err, results) => {
