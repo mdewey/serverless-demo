@@ -2,6 +2,7 @@
 const jwt = require("jsonwebtoken");
 
 const mongo = require("./database");
+const messenger = require("./messaging");
 
 const buildJsonResponse = (json) => {
   const response = {
@@ -66,7 +67,6 @@ module.exports.addYesToVirtue = (event, context) => {
   })
 }
 
-
 module.exports.addNoToVirtue = (event, context) => {
   console.log({ event, context })
   const user = getUserFromToken(event);
@@ -76,4 +76,14 @@ module.exports.addNoToVirtue = (event, context) => {
       return context.done(null, buildJsonResponse({ user, err, results }));
     })
   })
+}
+
+module.exports.sendEmail = (event, context) => {
+  // get all users who have opt in
+  mongo.getAllUserForMessaging((err, users) => {
+    users.map(user => {
+      messenger.sendEmail(user)
+    });
+    return context.done(null, { complete: true, err,  sentToCount: users.length })
+  });
 }

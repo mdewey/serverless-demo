@@ -15,6 +15,7 @@ const connectToDatabase = (next) => {
 const addUser = (user, next) => {
     connectToDatabase((err, db) => {
         const _users = db.collection("users");
+        user.allowMessaging = true;
         _users.insertOne(user, (err, result) => {
             return next(err, result)
         })
@@ -123,7 +124,14 @@ const addNoToVirtue = (user, virtueId, next) => {
     });
 }
 
-
+const getAllUserForMessaging = (next) => {
+    connectToDatabase((err, db) => {
+        const _users = db.collection("users");
+        _users.find({allowMessaging:true}).toArray((err, users) => {
+            return next(err, users)
+        })
+    });
+}
 
 module.exports = {
     addUser,
@@ -131,5 +139,6 @@ module.exports = {
     getUserVirtuesCount,
     addYesToVirtue,
     addNoToVirtue,
-    getUsersTodayValues
+    getUsersTodayValues,
+    getAllUserForMessaging
 }

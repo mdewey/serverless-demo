@@ -35,3 +35,8 @@ functions:
           path: virtue/{id}/no
           method: post
           cors: true
+  sendEmail:
+    handler: handler.sendEmail
+    events:
+      - schedule: rate(12 hours)
+      
