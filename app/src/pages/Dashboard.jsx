@@ -41,23 +41,9 @@ class Home extends Component {
         auth.logout();
     }
 
-    noClicked(e, virtue) {
-        console.log("clicked no for", { virtue })
-        const _url = BASE_URL.concat("virtue/", virtue.id, "/no")
-        fetch(_url, {
-            method: "post",
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("id_token")
-            },
-            // body: JSON.stringify(_data)
-        }).then(resp => resp.json()).then(data => {
-            console.log("back", { data })
-        })
-    }
-
     yesClicked(e, virtue) {
-        console.log("clicked yes for", { virtue })
-        console.log("clicked no for", { virtue })
+        console.log("clicked yes for", { virtue }, e.target)
+        const el = e.target;
         const _url = BASE_URL.concat("virtue/", virtue.id, "/yes")
         fetch(_url, {
             method: "post",
@@ -66,6 +52,8 @@ class Home extends Component {
             },
             // body: JSON.stringify(_data)
         }).then(resp => resp.json()).then(data => {
+            el.innerHTML = 'yes.';
+            el.disabled = true;
             console.log("back", { data })
         })
     }
@@ -110,8 +98,7 @@ class Home extends Component {
                                 <div>{virtue.description}</div>
                             </div>
                             <div className="yes-no-buttons">
-                                <button onClick={evt => this.noClicked(evt, virtue)}>No</button>
-                                <button onClick={evt => this.yesClicked(evt, virtue)}>Yes</button>
+                                <button onClick={evt => this.yesClicked(evt, virtue)}>was I like Ben?</button>
                             </div>
                         </div>)
                     })}

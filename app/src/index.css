@@ -34,9 +34,15 @@ body {
   display: flex;
 }
 .yes-no-buttons > button{
-  width: 50%;
+  width: 100%;
+  background-color: burlywood;
+  text-decoration: underline;
 }
 
 .virtue-description{
   width: 75%;
+}
+
+.green{
+  color: green;
 }
