@@ -59,28 +59,34 @@ class Home extends Component {
         console.log(this.props)
         return (
             <div className="main-content">
-                <header>
-                    <h2>Be Like Ben!</h2>
-                    <h4>Not like that other guy..</h4>
+                <header className="report-header">
+                    <header className="logo-container">
+                        <img src="/images/glasses.png" alt="Good Ol' Benny" height="50px" />
+                        <div className="logo-main">
+                            <h2>Be Like Ben!</h2>
+                            <h4 className="subtitle">Not like that other guy..</h4>
+                        </div>
+                    </header>
+                    <section>
+                        <Link to={{
+                            pathname: "/home"
+                        }}>Back</Link>
+                    </section>
                 </header>
                 <section>
                     "Ben Points" are a system to help you track how many times you have acted in accordance with one of the 13 virtues.
                 </section>
-                <section>
-                    <Link to={{
-                        pathname: "/home"
-                    }}>Back</Link>
-                </section>
+
                 <section className="report-ben-list">
                     <header>My Past Bens</header>
                     <section>
-                        total bens: {this.state.bens.length}
+                        total: {this.state.bens.length}
                     </section>
-                    <section>
+                    <section className="report-ben-list-items">
                         {this.state.bens.map((ben, i) => {
                             return (<div key={i}>
                                 <div>{this.state.virtues[ben.virtueId].title}</div>
-                                <div>{format(ben.timestamp, "MMM D, YY")}</div>
+                                <time>{format(ben.timestamp, "MMM D, YY")}</time>
                             </div>)
                         })}
                     </section>

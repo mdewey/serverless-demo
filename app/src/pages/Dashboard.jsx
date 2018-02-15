@@ -14,7 +14,7 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            benPoints:0,
+            benPoints: 0,
             virtues: [
                 { title: "Temperance", id: 0, description: "Eat not to dullness. Drink not to elevation." },
                 { title: "Silence", id: 1, description: "Speak not but what may benefit others or yourself. Avoid trifling conversation." },
@@ -82,9 +82,14 @@ class Home extends Component {
         console.log(this.props)
         return (
             <div className="main-content">
-                <header>
-                    <h2>Be Like Ben!</h2>
-                    <h4>Not like that other guy..</h4>
+                <header className="report-header">
+                    <header className="logo-container">
+                        <img src="/images/glasses.png" alt="Good Ol' Benny" height="50px" />
+                        <div className="logo-main">
+                            <h2>Be Like Ben!</h2>
+                            <h4 className="subtitle">Not like that other guy..</h4>
+                        </div>
+                    </header>
                 </header>
                 <section>
                     You have {this.state.benPoints} Benjamins.
@@ -92,13 +97,13 @@ class Home extends Component {
                 </section>
                 <section className="virtues-container">
                     {this.state.virtues.map((virtue, i) => {
-                        return (<div key={i}>
+                        return (<div key={i} className="virtue">
                             <div className="virtue-description">
                                 <div>{virtue.title}</div>
                                 <div>{virtue.description}</div>
                             </div>
                             <div className="yes-no-buttons">
-                                <button onClick={evt => this.yesClicked(evt, virtue)}>was I like Ben?</button>
+                                <button onClick={evt => this.yesClicked(evt, virtue)}>Was I like Ben?</button>
                             </div>
                         </div>)
                     })}

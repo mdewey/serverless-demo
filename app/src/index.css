@@ -1,48 +1,102 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
-
-*{
-  border: 1px green solid;
+.subtitle {
+    font-size: 0.8em;
+    color: grey;
 }
 
-.main-content{
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
+.logo-container {
+    display: flex;
+    flex-direction: row;
+    ;
 }
 
-.main-content > section {
-  display: flex;
-  justify-content: center;
+.logo-main {
+    display: flex;
+    flex-direction: column;
 }
 
-.virtues-container{
-  display: flex;
-  flex-direction: column;
-}
-.virtues-container > div{
-  display: flex;
-  flex-direction: row;
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1em;
 }
 
-.yes-no-buttons{
-  width: 25%;
-  display: flex;
-}
-.yes-no-buttons > button{
-  width: 100%;
-  background-color: burlywood;
-  text-decoration: underline;
+.main-content>section {
+    display: flex;
+    justify-content: center;
 }
 
-.virtue-description{
-  width: 75%;
+.virtues-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #dddddd;
+    margin-left:-1em;
+    margin-right:-1em;
 }
 
-.green{
-  color: green;
+.virtues-container>div {
+    display: flex;
+    flex-direction: row;
+    margin: 0.5em;
+    background-color: white;
+}
+
+.yes-no-buttons {
+    width: 25%;
+    display: flex;
+}
+
+.yes-no-buttons>button {
+    width: 100%;
+    background-color: burlywood;
+    text-decoration: underline;
+}
+
+.virtue-description {
+    width: 75%;
+}
+
+.green {
+    color: green;
+}
+
+.report-ben-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1em;
+}
+
+.report-ben-list-items {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #dddddd;
+}
+
+.report-ben-list-items>div {
+    margin: 0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: white;
+}
+
+.report-ben-list-items>div>time {
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+.report-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1em;
 }

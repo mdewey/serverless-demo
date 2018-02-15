@@ -22,18 +22,23 @@ class Home extends Component {
         console.log(this.props)
         return (
             <div className="main-content">
-                <header className="home-header">
-                    <h2>Be Like Ben!</h2>
-                    <h4>Not like that other guy..</h4>
+                <header className="report-header">
+                    <header className="logo-container">
+                        <img src="/images/glasses.png" alt="Good Ol' Benny" height="50px" />
+                        <div className="logo-main">
+                            <h2>Be Like Ben!</h2>
+                            <h4 className="subtitle">Not like that other guy..</h4>
+                        </div>
+                    </header>
                 </header>
                 <section className="home-hero">
-                    <img src="/images/ben_frank.jpg" alt="Good Ol' Benny" height="100px"/>
+                    <img src="/images/ben_frank.jpg" alt="Good Ol' Benny" height="100px" />
                 </section>
                 <section className="home-text">
-                    Welcome to Be Like Ben! This is a self improvement app that will help guide you to follow Benjamin Franklin 13 Virtue. Through daily reminders and nudges, and logging your behavior, this will help make you more aware of you actions and make you act more like one of the defining man in history. 
+                    Welcome to Be Like Ben! This is a self improvement app that will help guide you to follow Benjamin Franklin 13 Virtue. Through daily reminders and nudges, and logging your behavior, this will help make you more aware of you actions and make you act more like one of the defining man in history.
                 </section>
                 <section className="home-links">
-                    <a href="#"  onClick={this.login.bind(this)}>Get Started</a>
+                    <a href="#" onClick={this.login.bind(this)}>Get Started</a>
                 </section>
             </div>
         )
