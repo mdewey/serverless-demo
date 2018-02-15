@@ -63,9 +63,8 @@ module.exports.getAllVirtuesForUser = (event, context) => {
     } else {
       mongo.getAllUsersVirtues(user, (err, virtues) => {
         return context.done(null, buildJsonResponse({
-          "message": "returning user",
-          user: foundUser,
-          data: { count, today }
+          "message": "returning virtues",
+          data: virtues
         }));
       });
     }

@@ -145,7 +145,7 @@ const getAllUsersVirtues = (user, next) =>{
             },
             {
                 $sort:{
-                    "timeStamp":-1
+                    "timeStamp":1
                 }
             }
         ], (err, results) => {
@@ -164,5 +164,6 @@ module.exports = {
     addYesToVirtue,
     addNoToVirtue,
     getUsersTodayValues,
-    getAllUserForMessaging
+    getAllUserForMessaging,
+    getAllUsersVirtues
 }

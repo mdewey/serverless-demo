@@ -21,6 +21,13 @@ functions:
           path: getorcreate
           method: post
           cors: true
+  getAllVirtuesForUser:
+    handler: handler.getAllVirtuesForUser
+    events:
+      - http: 
+          path: all
+          method: get
+          cors: true
   addYesToVirtue:
     handler: handler.addYesToVirtue
     events:
