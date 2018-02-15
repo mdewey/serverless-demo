@@ -133,6 +133,30 @@ const getAllUserForMessaging = (next) => {
     });
 }
 
+const getAllUsersVirtues = (user, next) =>{
+    const dateKey = format(Date.now(), "YYYY-MM-DD");
+    connectToDatabase((err, db) => {
+        const _virtues = db.collection("virtues");
+        _virtues.aggregate([
+            {
+                $match: {
+                    userId: user._id, 
+                }
+            },
+            {
+                $sort:{
+                    "timeStamp":-1
+                }
+            }
+        ], (err, results) => {
+            results.toArray().then((data) => {
+                console.log("getting all of bens", { err, data })
+                return next(err, data)
+            });
+        })
+    });
+}
+
 module.exports = {
     addUser,
     getUser,

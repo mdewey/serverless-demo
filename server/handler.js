@@ -32,7 +32,6 @@ module.exports.index = (event, context) => {
   })
 };
 
-
 module.exports.getOrCreateUser = (event, context) => {
   const user = getUserFromToken(event);
   mongo.getUser(user.email, (err, foundUser) => {
@@ -52,6 +51,23 @@ module.exports.getOrCreateUser = (event, context) => {
         })
       })
 
+    }
+  })
+}
+
+module.exports.getAllVirtuesForUser = (event, context) => {
+  const user = getUserFromToken(event);
+  mongo.getUser(user.email, (err, foundUser) => {
+    if (!foundUser) {
+      return context.done(null, buildJsonResponse({ "message": "invalid token", status: 404 }));
+    } else {
+      mongo.getAllUsersVirtues(user, (err, virtues) => {
+        return context.done(null, buildJsonResponse({
+          "message": "returning user",
+          user: foundUser,
+          data: { count, today }
+        }));
+      });
     }
   })
 }
@@ -84,6 +100,6 @@ module.exports.sendEmail = (event, context) => {
     users.map(user => {
       messenger.sendEmail(user)
     });
-    return context.done(null, { complete: true, err,  sentToCount: users.length })
+    return context.done(null, { complete: true, err, sentToCount: users.length })
   });
 }
